@@ -22,7 +22,8 @@ builder.Services.AddLogging(opts =>
 });
 
 var app = builder.Build();
-app.MapHub<MainHub>("/current-time");
+app.MapHub<TimeHub>("/current-time");
+app.MapHub<MessageHub>("/messages");
 
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider.GetService<SignalRApi>();

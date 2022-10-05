@@ -7,12 +7,12 @@ using Polly.Retry;
 
 namespace SignalR.Client.Clients;
 
-public class MainClient : BackgroundService
+public class StreamClient : BackgroundService
 {
-    private readonly ILogger<MainClient> _logger;
+    private readonly ILogger<StreamClient> _logger;
     private readonly AsyncRetryPolicy _policy;
 
-    public MainClient(ILogger<MainClient> logger)
+    public StreamClient(ILogger<StreamClient> logger)
     {
         _logger = logger;
         _policy = Policy
@@ -35,12 +35,9 @@ public class MainClient : BackgroundService
     {
         const string uri = "https://localhost:61345/current-time";
 
-        await using var connection = new HubConnectionBuilder().WithUrl(uri).Build();
+        _logger.LogInformation($"Starting connection : {uri}");
 
-        connection.On<string>("ReceiveMessage", (message) =>
-        {
-            _logger.LogInformation(message);
-        });
+        await using var connection = new HubConnectionBuilder().WithUrl(uri).Build();
 
         var stream = connection.StreamAsync<DateTime>("Streaming",
               stoppingToken);

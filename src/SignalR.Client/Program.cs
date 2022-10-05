@@ -10,7 +10,8 @@ Console.WriteLine("Hello, World!");
 using var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddHostedService<MainClient>();
+        services.AddHostedService<StreamClient>();
+        services.AddHostedService<MessageClient>();
     })
     .ConfigureLogging((context, logging) =>
     {

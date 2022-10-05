@@ -9,8 +9,8 @@ namespace SignalR.Server.MinimalApi;
 public class SignalRApi
 {
     private readonly ILogger<SignalRApi> _logger;
-    private readonly IHubContext<MainHub> _hub;
-    public SignalRApi(ILogger<SignalRApi> logger, IHubContext<MainHub> hub)
+    private readonly IHubContext<MessageHub> _hub;
+    public SignalRApi(ILogger<SignalRApi> logger, IHubContext<MessageHub> hub)
     {
         _logger = logger;
         _hub = hub;
